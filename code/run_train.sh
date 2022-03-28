@@ -17,7 +17,7 @@ export PYTHONPATH=${PWD}:${PYTHONPATH}
 CUDA_VISIBLE_DEVICES='0' python train/train.py \
         --data-set ChaosCT \
         --gpu 0 \
-        --data-dir '../data/Chaos/Train_Sets/CT/' \
+        --data-dir '../data/my/Train_Sets/' \
         --classes-num 2 \
         --input-size 512,512 \
         --random-mirror \

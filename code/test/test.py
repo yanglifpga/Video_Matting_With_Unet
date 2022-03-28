@@ -41,9 +41,9 @@ class Configs():
 
         #dataset options
         parser.add_argument('--data_root', type=str, default='../data', help='path to dataset')
-
+        
         parser.add_argument('--input_size', type=str, default='512,512', help='input size')
-        parser.add_argument('--list_file', type=str, default='dataset/lists/val_img_seg.txt', help='validation list file')
+        parser.add_argument('--list_file', type=str, default='dataset/lists/val_my_img_seg.txt', help='validation list file')
         parser.add_argument('--weight', type=str, default=None, help='resume from weight')
         parser.add_argument('--classes_num', type=int, default=2, help='dataset class number')
         parser.add_argument('--ignore_index', type=int, default=255, help='dataset ignore index')
@@ -110,7 +110,7 @@ def main():
         exit(-1)
 
     
-    valloader, H, W = get_dataset(args, 'ChaosCT')
+    valloader, H, W = get_dataset(args, 'my')
 
     input = torch.randn([1, 3, H, W])
 
@@ -143,7 +143,7 @@ def main():
 
 def get_dataset(args, data_set):
     h, w = map(int, args.input_size.split(','))
-    valloader = data.DataLoader(DataSet(root=args.data_root, list_path='./dataset/lists/val_img_seg.txt', \
+    valloader = data.DataLoader(DataSet(root=args.data_root, list_path='./dataset/lists/val_my_img_seg.txt', \
                       crop_size=(h, w), mean=IMG_MEAN, scale=True, mirror=False, ignore_label=args.ignore_index), \
                       batch_size=1, shuffle=False, pin_memory=True)
 

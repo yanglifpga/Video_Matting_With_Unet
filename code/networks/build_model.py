@@ -99,7 +99,7 @@ class NetModel():
 
         self.solver = optim.SGD([{'params': filter(lambda p: p.requires_grad, self.student.parameters()), 'initial_lr': args.lr}], \
                                                           args.lr, momentum=args.momentum, weight_decay=args.weight_decay)
-        class_weights = [1, 12] 
+        class_weights = [1,2] 
         self.criterion = self.DataParallelCriterionProcess(Criterion(weight=class_weights, ignore_index=255))
         self.loss = 0.0
 

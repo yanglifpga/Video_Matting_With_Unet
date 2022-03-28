@@ -17,23 +17,23 @@ export PYTHONPATH=${PWD}:${PYTHONPATH}
 export W_QUANT=1
 
 CUDA_VISIBLE_DEVICES='0' python test/test.py  \
-        --data_root '../data/Chaos/Train_Sets/CT/' \
+        --data_root '../data/my/Train_Sets/' \
         --input_size 512,512 \
-        --weight '../float/ChaosCT_0.9770885167.pth' \
+        --weight '../ckpt_unet/my_19706_0.9604023634863371.pth' \
         --quant_mode calib
 
 CUDA_VISIBLE_DEVICES='0' python test/test.py  \
-        --data_root '../data/Chaos/Train_Sets/CT/' \
+        --data_root '../data/my/Train_Sets/' \
         --input_size 512,512 \
-        --weight '../float/ChaosCT_0.9770885167.pth' \
+        --weight '../ckpt_unet/my_19706_0.9604023634863371.pth' \
         --quant_mode test
 
 echo "dump xmodel"
 CUDA_VISIBLE_DEVICES='0' python test/test.py  \
         --dump_xmodel \
-        --data_root '../data/Chaos/Train_Sets/CT/' \
+        --data_root '../data/my/Train_Sets/' \
         --input_size 512,512 \
-        --weight '../float/ChaosCT_0.9770885167.pth' \
+        --weight '../ckpt_unet/my_19706_0.9604023634863371.pth' \
         --quant_mode test
 
 

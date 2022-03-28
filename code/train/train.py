@@ -32,7 +32,8 @@ IMG_MEAN = np.array((104.00698793,116.66876762,122.67891434), dtype=np.float32)
 def main():
     args = TrainOptions().initialize()
     model = NetModel(args)
-    trainloader, valloader, save_steps, H, W = get_dataset(args, 'ChaosCT')
+    # trainloader, valloader, save_steps, H, W = get_dataset(args, 'ChaosCT')
+    trainloader, valloader, save_steps, H, W = get_dataset(args, 'my')
     batch =  iter(trainloader)
     
     max_loss = 10.0
@@ -57,7 +58,8 @@ def main():
             logging.info('[val with {}x{}] mean_IU:{:.6f} Dice:{:.6f}'.format(H, W, mean_IU, Dice))
             if Dice > max_dice:
                 max_dice = Dice
-                model.save_ckpt(iteration, Dice, 'ChaosCT')
+                # model.save_ckpt(iteration, Dice, 'ChaosCT')
+                model.save_ckpt(iteration, Dice, 'my')
                 logging.info('save ckpt at {} with Dice:{:.6f}'.format(iteration, max_dice))
 
 def set_input(data):
@@ -71,11 +73,11 @@ def set_input(data):
 
 def get_dataset(args, data_set):
     h, w = map(int, args.input_size.split(','))
-    trainloader= data.DataLoader(DataSet(root=args.data_dir, list_path='./dataset/lists/train_img_seg.txt', \
+    trainloader= data.DataLoader(DataSet(root=args.data_dir, list_path='./dataset/lists/train_my_img_seg.txt', \
                       max_iters=args.num_steps*args.batch_size, crop_size=(h, w), mean=IMG_MEAN, \
                       scale=args.random_scale, mirror=args.random_mirror, ignore_label=args.ignore_index), \
                       batch_size=args.batch_size, shuffle=False, num_workers=4, pin_memory=True, drop_last=True)
-    valloader = data.DataLoader(DataSet(root=args.data_dir, list_path='./dataset/lists/val_img_seg.txt', \
+    valloader = data.DataLoader(DataSet(root=args.data_dir, list_path='./dataset/lists/train_myimg_seg.txt', \
                       crop_size=(512, 512), mean=IMG_MEAN, scale=True, mirror=False, ignore_label=args.ignore_index), \
                       batch_size=1, shuffle=False, pin_memory=True)
     save_steps = int(479/args.batch_size)
