@@ -1,0 +1,8 @@
+{
+    "lib": "libvart-dpu-runner.so",
+    "filename": "Unet_vck5000.xmodel",
+    "kernel": [
+        "subgraph_unet__center_conv1_0_bias"
+    ],
+    "target": "DPUCVDX8H_ISA1_F2W2"
+}

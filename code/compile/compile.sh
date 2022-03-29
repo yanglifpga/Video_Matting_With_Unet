@@ -67,8 +67,8 @@ compile() {
   vai_c_xir \
   --xmodel      ${BUILD}/quantize_result/unet_int.xmodel \
   --arch        $ARCH \
-  --net_name    CNN_${TARGET} \
-  --output_dir  ${BUILD}/compiled_model
+  --net_name    Unet_${TARGET} \
+  --output_dir  ${BUILD}/compile/compiled_model
 }
 
 compile 2>&1 | tee ${LOG}/compile_$TARGET.log
