@@ -1,4 +1,11 @@
 # Video_Matting_With_Unet
+### Story
+Background replacement is in strong demand in fields such as live video broadcasting and video conferencing. It needs to distinguish the semantic information of people and backgrounds in real time. Isolate characters from cluttered backgrounds.
+unet is often used to handle similar scenarios.
+VCK5000 is used to replace GPU, which is usually widely used hardware in CNN inference, but consumes a lot of power.
+In this project, a self-built dataset and a GTX1070 graphics card are used to train the CNN network.
+Use Vitis-ai1.4 docker to quantify and compile the CNN model and deploy it on the VCK5000 accelerator card.
+
 ### Contents
 1. [Installation](#installation)
 2. [Preparation](#preparation)
