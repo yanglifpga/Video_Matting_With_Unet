@@ -5,6 +5,70 @@ unet is often used to handle similar scenarios.
 VCK5000 is used to replace GPU, which is usually widely used hardware in CNN inference, but consumes a lot of power.
 In this project, a self-built dataset and a GTX1070 graphics card are used to train the CNN network.
 Use Vitis-ai1.4 docker to quantify and compile the CNN model and deploy it on the VCK5000 accelerator card.
+At least 100GB of disk space for the disk partition running Docker
+Clone the Vitis-AI repository to obtain the examples, reference code, and scripts.
+git clone --recurse-submodules https://github.com/Xilinx/Vitis-AI  
+
+cd Vitis-AI
+GPU Docker
+Use below commands to build the GPU docker:
+cd setup/docker
+./docker_build_gpu.sh
+To run the GPU docker, use command:
+#./docker_run.sh xilinx/vitis-ai-gpu:latest
+./docker_run.sh xilinx/vitis-ai-gpu:1.4.1.978
+Running lspci to check that the VCK5000 Card has been installed
+lspci -vd 10ee:
+An output similar to the following example is seen.
+lspci -vd 10ee:
+02:00.0 Memory controller: Xilinx Corporation Device 5044
+	Subsystem: Xilinx Corporation Device 000e
+	Flags: bus master, fast devsel, latency 0, IRQ 17
+	Memory at b0000000 (64-bit, prefetchable) [size=128M]
+	Memory at b8020000 (64-bit, prefetchable) [size=128K]
+	Capabilities: <access denied>
+	Kernel driver in use: xclmgmt
+	Kernel modules: xclmgmt
+
+02:00.1 Memory controller: Xilinx Corporation Device 5045
+	Subsystem: Xilinx Corporation Device 000e
+	Flags: bus master, fast devsel, latency 0, IRQ 18
+	Memory at b8000000 (64-bit, prefetchable) [size=128K]
+	Memory at a0000000 (64-bit, prefetchable) [size=256M]
+	Capabilities: <access denied>
+	Kernel driver in use: xocl
+	Kernel modules: xocl
+verify card has been successfully programmed with BASE platform
+Enter the following command:
+sudo /opt/xilinx/xrt/bin/xbmgmt flash --scan
+---------------------------------------------------------------------
+Deprecation Warning:
+    The given legacy sub-command and/or option has been deprecated
+    to be obsoleted in the next release.
+ 
+    Further information regarding the legacy deprecated sub-commands
+    and options along with their mappings to the next generation
+    sub-commands and options can be found on the Xilinx Runtime (XRT)
+    documentation page:
+    
+    https://xilinx.github.io/XRT/master/html/xbtools_map.html
+
+    Please update your scripts and tools to use the next generation
+    sub-commands and options.
+---------------------------------------------------------------------
+Card [0000:02:00.0]
+    Card type:		vck5000-es1
+    Flash type:		OSPI_VERSAL
+    Flashable partition running on FPGA:
+        xilinx_vck5000-es1_gen3x16_base_2,[ID=0xb376430f2629b15d],[SC=4.4.6]
+    Flashable partitions installed in system:	
+        xilinx_vck5000-es1_gen3x16_base_2,[ID=0xb376430f2629b15d],[SC=4.4.6]
+/opt/xilinx/xrt/bin/xbutil validate
+
+ERROR: Please specify a single device using --device option
+
+List of available devices:
+  [0000:02:00.1] : xilinx_vck5000-es1_gen3x16_base_2
 
 ### Contents
 1. [Installation](#installation)
