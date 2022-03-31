@@ -88,6 +88,16 @@
   bash compile.sh
   # compiled module is in lockate /code/compile/compiled_model/
   ```
+4. Demo
+  ```shell
+  cd ./code/demo/
+  # modify configure if you need, includes data root, weight path,...
+  chmod +x ./build.sh
+  ./build.sh
+  ./test_jpeg_segmentation ../compile/compiled_model/Unet_vck5000.xmodel <path to image>
+  ./test_video_segmentation ../compile/compiled_model/Unet_vck5000.xmodel /dev/video0
+  # compiled module is in lockate /code/compile/compiled_model/
+  ```  
 
 ### Model_info
 
