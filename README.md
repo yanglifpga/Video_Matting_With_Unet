@@ -59,13 +59,13 @@
     
    ```
    * `data` directory structure like:
-   ├── data
-   └── my
-       └── Train_Sets
-           ├── lable
-           │   └── lable_10001.png
-           └── live
-               └── live_10001.png
+   + data
+        +my
+           +Train_Sets
+               +lable
+                   +lable_10001.png
+               +live
+                   +live_10001.png
     ```
 ### Eval
 
